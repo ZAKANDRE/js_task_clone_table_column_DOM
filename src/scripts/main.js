@@ -1,34 +1,38 @@
+const theadTh = document.querySelectorAll('tr th');
+const tbodyTd = document.querySelectorAll('tr td');
+const tr = document.querySelectorAll('table tr');
 
-let theadTh = document.querySelectorAll('tr th');
-let tbodyTd = document.querySelectorAll('tr td');
-let tr = document.querySelectorAll('table tr');
+const tdFin = Math.ceil(tbodyTd.length / tr.length);
 
-tdFin = Math.ceil(tbodyTd.length / tr.length);
+let i = 0;
+let a = 0;
+let theadData = [];
 
-let i = 0; let a = 0; let theadData = [];
-
-function clone(item, cellule){
+function clone(item, cellule) {
   i++;
-  let newTh = document.createElement(`${cellule}`);
 
-  if (i === 2){
+  const newTh = document.createElement(`${cellule}`);
+
+  if (i === 2) {
     theadData.push(item.textContent);
   }
 
-  if(i === tdFin){
-    newTh.textContent=theadData[a];
+  if (i === tdFin) {
+    newTh.textContent = theadData[a];
     item.before(newTh);
-    i=0;
+    i = 0;
     a++;
   }
 }
 
-theadTh.forEach(function(item){
- clone(item,'th');
+theadTh.forEach(function (item) {
+  clone(item, 'th');
 });
 
-i=0; a=0; theadData = [];
+i = 0;
+a = 0;
+theadData = [];
 
-tbodyTd.forEach(function(item){
- clone(item, 'td');  
+tbodyTd.forEach(function (item) {
+  clone(item, 'td');
 });
